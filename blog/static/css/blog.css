@@ -1,5 +1,5 @@
 .page-header {
-    background-color: #C25100;
+    background-color: #cdf2f9;
     margin-top: 0;
     margin-bottom: 40px;
     padding: 20px 20px 20px 40px;
@@ -9,24 +9,49 @@
 .page-header h1 a,
 .page-header h1 a:visited,
 .page-header h1 a:active {
-    color: #ffffff;
+    color: #064984;
     font-size: 36pt;
     text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4 {
+.login{
+    text-align: center;
+}
+
+.login input{
+    color: #064984;
+    border-color:#064984;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+.body{
+    background-color: whitesmoke;
+}
+
+h1{
     font-family: 'Lobster', cursive;
 }
 
+h2,
+h3,
+h4{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+p{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
 .date {
-    color: #828282;
+    color: #4188b3;
 }
 
 .save {
     float: right;
+    color: #064984;
+    background: none;
+    border-color:#064984;
+    font-family: 'Balsamiq Sans', cursive;
 }
 
 .post-form textarea,
@@ -37,10 +62,12 @@ h4 {
 .top-menu,
 .top-menu:hover,
 .top-menu:visited {
-    color: #ffffff;
+    color: #4188b3;
     float: right;
-    font-size: 26pt;
+    font-size: 20pt;
     margin-right: 20px;
+    margin-top: 20px;
+    font-family: 'Balsamiq Sans', cursive;
 }
 
 .post {
@@ -53,18 +80,89 @@ h4 {
 }
 
 .post > .date,
-.post > .actions {
+.post > .actions{
     float: right;
 }
 
 .btn-secondary,
 .btn-secondary:visited {
-    color: #C25100;
+    color: #064984;
     background: none;
-    border-color: #C25100;
+    border-color:#064984;
+    font-family: 'Balsamiq Sans', cursive;
 }
 
 .btn-secondary:hover {
     color: #FFFFFF;
-    background-color: #C25100;
+    background-color: #064984;
+}
+
+.comment {
+    margin: 20px 0px 20px 20px;
+}
+
+.author{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+.btn-default{
+    color:#064984 ;
+}
+
+.comment > .date{
+    float: right;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+table{
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table th{
+    border: 3px solid #064984;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Balsamiq Sans', cursive;
+    background-color: #74abc7;
+}
+
+table tr{
+    border: 3px solid #064984;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+table td{
+    border: 3px solid #064984;
+    padding: 5px;
+    text-align: center;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+tr:nth-child(even) {
+    background-color: #74abc7;
+}
+
+tr:nth-child(odd) {
+    
+}
+
+.board tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.board tr:first-child th:last-child {
+    border-top-right-radius: 12px;    
+}
+
+.board tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.board tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
 }

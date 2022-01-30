@@ -4,10 +4,12 @@
     {% for post in posts %}
         <article class="post">
             <time class="date">
-                {{ post.published_date }}
+                <p>{{ post.published_date }}</p>
             </time>
             <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p>{{ post.text|linebreaksbr }}</p>
+            <p><a href="{% url 'post_detail' pk=post.pk %}">Comments:{{ post.approved_comments.count }}</a></p>
         </article>
+        <hr>
     {% endfor %}
 {% endblock %}

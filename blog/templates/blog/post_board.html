@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <table class="board">
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Writer</th>
+                <th>Content</th>
+                <th>Created Time</th>
+                <th>Comment count</th>
+                <th>Publish time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></td>
+                <td>{{post.author}}</td>
+                <td>{{post.text| truncatechars:20}}</td>
+                <td>{{post.created_date}}</td>
+                <td>{{post.approved_comments.count}}</td>
+                <td>{{post.published_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
