@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <article class="post">
+    <article class="post" style="background-color: white;padding:20px 20px 20px 20px ;">
         <aside class="actions">
             {% if user.is_authenticated %}
                 <a class="btn btn-secondary" href="{% url 'post_edit' pk=post.pk %}">
@@ -19,34 +19,45 @@
         </aside>
         <h2>{{ post.title }}</h2>
         {% if post.published_date %}
-            <div class="date">
-                <p>{{ post.published_date }}</p>
+            <div>
+                <p>{{post.author}}· Posted at {{ post.published_date }}</p>
             </div>
+        {%else%}
+        <div>
+            <p>{{post.author}}· Created at {{post.created_date}}</p>
+        </div>
         {% endif %}
         <p>{{ post.text|linebreaksbr }}</p>
-        <hr>
-        <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">
-            <p>Add comment {% include './icons/chat-square-text.svg' %}</p>
-        </a>
+        <hr style="color: lightslategray;margin-top: 10px;">
         {% for comment in post.comments.all %}
             <div class="comment">
-                <div class="check">
-                    {% if not comment.approved_comment %}
-                        <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">
-                            <p>Remove {% include './icons/clipboard-x.svg' %}</p>
-                        </a>
-                        <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}">
-                            <p>Approve {% include './icons/clipboard-check.svg' %}</p>
-                        </a>
-                    {% endif %}
-                </div>
-                <strong class="author">{{ comment.author }}</strong>
-                <p class="date">{{ comment.created_date }}</p>
-                <p>{{ comment.text|linebreaks }}</p>
-                
+                {% if not comment.approved_comment %}
+                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}" style="float:right;">
+                    <p>Approve {% include './icons/clipboard-check.svg' %}</p>
+                </a>
+                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}" style="float: right;">
+                    <p>Remove {% include './icons/clipboard-x.svg' %}</p>
+                </a>
+                {% endif %}
+                <p style="color: gray;">
+                    <strong style="color: black;">{{ comment.author }}</strong> , {{ comment.created_date }}
+                </p> 
+                <p>{{ comment.text|linebreaks }}</p>    
             </div>
+            <hr style="color: lightslategray;">
         {% empty %}
+        <div class="comment">
             <p>No comments here yet :(</p>
+        </div>
+        <hr style="color: lightslategray;">
         {% endfor %}
+        <div class="comment">
+            <a href="{% url 'add_comment_to_post' pk=post.pk %}" style="text-decoration:none;color: gray;">
+                <p>Add comment {% include './icons/chat-square-text.svg' %}</p>
+            </a>
+        </div>
+        <div>
+            
+        </div>
     </article>
 {% endblock %}

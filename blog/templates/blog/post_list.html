@@ -2,14 +2,30 @@
 
 {% block content %}
     {% for post in posts %}
-        <article class="post">
-            <time class="date">
-                <p>{{ post.published_date }}</p>
-            </time>
-            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p>{{ post.text|linebreaksbr }}</p>
-            <p><a href="{% url 'post_detail' pk=post.pk %}">Comments:{{ post.approved_comments.count }}</a></p>
-        </article>
-        <hr>
+        <div class="card list_card" style="border-radius: 20px;cursor: pointer;" onclick="location.href='{% url 'post_detail' pk=post.pk %}'">
+            <div class="card-header" style="border-top-left-radius: 20px;border-top-right-radius: 20px;">
+                <div class="user-pic">
+                    <!--這裡處理照片-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16" style="color:#FFA0A0;">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                </div>
+                <div class="user_and_date">
+                    <h4>{{post.author}}</h4>
+                    {% if post.latest_update_time  != post.created_date %}
+                    <h6>Latest update :{{ post.latest_update_time }}</h6>
+                    {%else%}
+                    <h6>{{ post.created_date }}</h6>
+                    {%endif%}
+                </div>
+            </div>
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <a href="{% url 'post_detail' pk=post.pk %}" style="color: lightslategray;text-decoration:none;">
+                    <h4>{% include './icons/chat-dots-fill.svg' %} {{ post.approved_comments.count }}</h4>
+                </a>
+            </div>
+        </div>
+        <br>
     {% endfor %}
 {% endblock %}

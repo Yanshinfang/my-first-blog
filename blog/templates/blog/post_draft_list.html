@@ -1,11 +1,31 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+    <div style="margin-left: 10px;">
+            <h2><strong>Drafts</strong></h2>
+    </div>
     {% for post in posts %}
-        <div class="post">
-            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
-            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|truncatechars:200 }}</p>
+        <div class="card" style="border-radius: 20px; margin-top: 20px;">
+            <div class="card-header" style="border-top-left-radius: 20px;border-top-right-radius: 20px;">
+                <div class="user-pic">
+                    <!--這裡處理照片-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16" style="color:#064984;">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                </div>
+                <div class="user">
+                    <h4>{{post.author}}</h4>
+                    <h6 style="color: lightslategray;">created: {{ post.created_date|date:'d-m-Y' }}</h6></div>
+            </div>
+            <div class="card-body" onclick="location.href='{% url 'post_detail' pk=post.pk %}'">
+                <a href="{% url 'post_detail' pk=post.pk %}" style="text-decoration:none;color: black;"><h2 class="card-title">{{ post.title }}</h2></a>
+                <p class="card-text"><h3>{{ post.text|linebreaksbr }}</h3></p>
+            </div>
+        </div>
+        <br>
+        {%empty%}
+        <div>
+            
         </div>
     {% endfor %}
 {% endblock %}

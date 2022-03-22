@@ -1,16 +1,44 @@
 from django.shortcuts import render,get_object_or_404
 from django.utils import timezone
 from .models import Post,Comment
-from .forms import PostForm,CommentForm
+from .forms import PostForm,CommentForm,RegisterForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.contrib import messages
+from django.views import View
 
 # Create your views here.
+
+def home(request):
+    return render(request, 'blog/home.html')
+
+class RegisterView(View):
+    form_class = RegisterForm
+    initial = {'key': 'value'}
+    template_name = 'blog/register.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+
+            return redirect(to='/')
+
+        return render(request, self.template_name, {'form': form})
 
 #list
 @login_required
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('latest_update_time').reverse()
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 @login_required
@@ -25,6 +53,7 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.update_time()
             #Post as draft
             #post.published_date = timezone.now()
             post.save()
@@ -43,6 +72,7 @@ def post_edit(request, pk):
             post.author = request.user
             #Post as draft
             #post.published_date = timezone.now()
+            post.update_time()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -51,7 +81,7 @@ def post_edit(request, pk):
 
 @login_required
 def post_draft_list(request):
-    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    posts = Post.objects.filter(published_date__isnull=True).order_by('latest_update_time').reverse()
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
 @login_required
@@ -73,6 +103,7 @@ def add_comment_to_post(request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.author = request.user
             comment.post = post
             comment.save()
             return redirect('post_detail', pk=post.pk)
@@ -95,5 +126,14 @@ def comment_remove(request, pk):
 #board
 @login_required
 def post_board(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('latest_update_time').reverse()
     return render(request, 'blog/post_board.html', {'posts': posts})
+
+#paginator
+@login_required
+def post_pagination(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('latest_update_time').reverse()
+    paginator = Paginator(posts,10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'blog/post_board.html',{'page_obj':page_obj})

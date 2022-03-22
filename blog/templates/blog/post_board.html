@@ -1,30 +1,61 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-
-    <table class="board">
-        <thead>
+    <table class="table table-hover" style="text-align: center;">
+        <thead style="background-color: #FFA0A0;">
             <tr>
                 <th>Topic</th>
                 <th>Writer</th>
                 <th>Content</th>
-                <th>Created Time</th>
+                <th>Latest update</th>
                 <th>Comment count</th>
                 <th>Publish time</th>
             </tr>
         </thead>
-        <tbody>
-            {% for post in posts %}
+        <tbody style="background: white;">
+            {% for post in page_obj %}
             <tr>
                 <td><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></td>
                 <td>{{post.author}}</td>
                 <td>{{post.text| truncatechars:20}}</td>
-                <td>{{post.created_date}}</td>
+                <td>{{post.latest_update_time}}</td>
                 <td>{{post.approved_comments.count}}</td>
                 <td>{{post.published_date}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <br>
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a>
+            </li>
+            {% endif %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ page_obj.number }}">
+                    <span>{{ page_obj.number }}</span>
+                </a>
+            </li>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                <span>{{page_obj.next_page_number}}</span>
+            </a>
+            </li>
+            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 {% endblock %}

@@ -9,7 +9,7 @@ class Post(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    #update_time = models.DateField(auto_now=True)
+    latest_update_time = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -20,6 +20,10 @@ class Post(models.Model):
 
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
+    
+    def update_time(self):
+        self.latest_update_time = timezone.now()
+        self.save()
     
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')

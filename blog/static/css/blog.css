@@ -1,168 +1,163 @@
-.page-header {
-    background-color: #cdf2f9;
-    margin-top: 0;
-    margin-bottom: 40px;
-    padding: 20px 20px 20px 40px;
+/*body*/
+.body{
+    background-color: whitesmoke;
+    font: 'Noto Sans', sans-serif;
 }
 
-.page-header h1,
-.page-header h1 a,
-.page-header h1 a:visited,
-.page-header h1 a:active {
-    color: #064984;
+main{
+    padding-top: 120px;
+}
+
+/*--------------------------------------*/
+
+/*navbar*/
+.navbar {
+    background-color: #FFE3E3;
+    text-align: center;
+}
+
+.navbar h3,
+.navbar h3 a,
+.navbar h3 a:visited,
+.navbar h3 a:active {
+    font-family: 'Lobster', cursive;
+    color: black;
     font-size: 36pt;
     text-decoration: none;
 }
 
-.login{
-    text-align: center;
+.top-menu,
+.top-menu:visited {
+    color: black;
+    font-size: 20pt;
+    float: right;
+    margin-right: 20px;
+    
 }
 
-.login input{
-    color: #064984;
-    border-color:#064984;
-    font-family: 'Balsamiq Sans', cursive;
+.top-menu:hover {
+    color: #FFA0A0;
 }
+/*--------------------------------------*/
 
-.body{
-    background-color: whitesmoke;
-}
-
-h1{
-    font-family: 'Lobster', cursive;
-}
-
-h2,
-h3,
-h4{
-    font-family: 'Balsamiq Sans', cursive;
-}
-
-p{
-    font-family: 'Balsamiq Sans', cursive;
-}
-
-.date {
-    color: #4188b3;
-}
-
+/*button*/
 .save {
     float: right;
-    color: #064984;
+    color: black;
     background: none;
-    border-color:#064984;
-    font-family: 'Balsamiq Sans', cursive;
-}
-
-.post-form textarea,
-.post-form input {
-    width: 100%;
-}
-
-.top-menu,
-.top-menu:hover,
-.top-menu:visited {
-    color: #4188b3;
-    float: right;
-    font-size: 20pt;
-    margin-right: 20px;
-    margin-top: 20px;
-    font-family: 'Balsamiq Sans', cursive;
-}
-
-.post {
-    margin-bottom: 70px;
-}
-
-.post h2 a,
-.post h2 a:visited {
-    color: #000000;
-}
-
-.post > .date,
-.post > .actions{
-    float: right;
+    border-color:black;
 }
 
 .btn-secondary,
 .btn-secondary:visited {
-    color: #064984;
+    color: black;
     background: none;
-    border-color:#064984;
-    font-family: 'Balsamiq Sans', cursive;
+    border-color:black;
 }
 
 .btn-secondary:hover {
     color: #FFFFFF;
-    background-color: #064984;
+    background-color: black;
 }
 
-.comment {
-    margin: 20px 0px 20px 20px;
+.btn-primary,
+.btn-primary:visited {
+    color: white;
+    background-color: black;
+    border-color: black;
 }
 
-.author{
-    font-family: 'Balsamiq Sans', cursive;
+.btn-primary:hover {
+    color: black;
+    background: none;
+    border-color:black;
 }
 
 .btn-default{
-    color:#064984 ;
+    color:black ;
 }
+/*--------------------------------------*/
 
-.comment > .date{
+/*form*/
+.post-form textarea,
+.post-form input {
+    width: 100%;
+}
+/*--------------------------------------*/
+
+/*post_detail*/
+.post > .actions{
     float: right;
-    font-family: 'Balsamiq Sans', cursive;
+}
+/*--------------------------------------*/
+
+/*post_list*/
+.list_card:hover {
+    background-color: gainsboro;
 }
 
-table{
-    border-collapse: separate;
-    border-spacing: 0;
+.card-header{
+    display: flex;
+    align-items: center;
+}
+
+.user-pic{
+    width: 50px;
+    height: 50px;
+    border: #FFA0A0 2px solid;
+    float: left;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.user_and_date{
+    position: relative;
+    margin-left: 10px;
+}
+
+.user_and_date h6{
+    color: lightslategray;
+}
+/*--------------------------------------*/
+
+/*post_detail comment section*/
+.comment {
+    margin: 20px 0px 20px 20px;
+}
+/*--------------------------------------*/
+
+/*post_board pagination*/
+.pagination_nav{
     margin-left: auto;
     margin-right: auto;
 }
 
-table th{
-    border: 3px solid #064984;
-    padding: 5px;
-    text-align: center;
-    font-family: 'Balsamiq Sans', cursive;
-    background-color: #74abc7;
+.pagination > li > a
+{
+    background-color: white;
+    color: #FFA0A0;
 }
 
-table tr{
-    border: 3px solid #064984;
-    padding: 5px;
-    text-align: center;
-    font-family: 'Balsamiq Sans', cursive;
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
 }
 
-table td{
-    border: 3px solid #064984;
-    padding: 5px;
-    text-align: center;
-    font-family: 'Balsamiq Sans', cursive;
+.pagination > .active > a
+{
+    color: white;
+    background-color: #FFA0A0 !Important;
+    border: solid 1px #FFA0A0 !Important;
 }
 
-tr:nth-child(even) {
-    background-color: #74abc7;
+.pagination > .active > a:hover
+{
+    background-color: #FFA0A0 !Important;
+    border: solid 1px #FFA0A0;
 }
-
-tr:nth-child(odd) {
-    
-}
-
-.board tr:first-child th:first-child {
-    border-top-left-radius: 12px;
-}
-
-.board tr:first-child th:last-child {
-    border-top-right-radius: 12px;    
-}
-
-.board tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
-}
-
-.board tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
-}
+/*--------------------------------------*/
